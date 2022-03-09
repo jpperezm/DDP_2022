@@ -1,36 +1,31 @@
-module uc(input wire [5:0] opcode, input wire z, output reg s_inc, s_inm, we3, wez, output reg [2:0] op_alu);
+module uc(input wire [5:0] opcode, input wire z, output reg s_mux_datos, s_inc, s_inm, we3, wez, output reg [2:0] op_alu);
 
 always @(opcode)
   casex (opcode)
-	
-    6'b0000xx:            // Carga Inm
-      begin
-        s_inc = 1'b1;     // s_inc a 1 en todos los opcodes que no son saltos
-        s_inm = 1'b1;     // s_inm a 1 para que te pille el dato inmediato en el mux
-        we3 = 1'b1;
-        wez = 1'b0;
-        op_alu = 3'b000; 
-      end
+// ##################################### TRAJANDO CON INMEDIATO ##############################################
 	  6'b1000xx:            // Oper. Alu (A)
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b1;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b000; 
       end
-	  6'b1001xx:            // Oper. Alu (A negado)
+    6'b1001xx:            // Oper. Alu (A negado) 
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b1;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b001; 
-      end 
-	  6'b1010xx:            // Oper. Alu (A + B)
+      end
+    6'b1010xx:            // Oper. Alu (A + B)
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b1;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b010; 
@@ -39,22 +34,25 @@ always @(opcode)
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b1;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b011; 
-      end   
+      end
     6'b1100xx:            // Oper. Alu (A AND B)
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b1;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b100; 
       end
-    6'b1101xx:            // Oper. Alu (A OR B)
+    6'b1101xx:           // Oper. Alu (A OR B)
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b1;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b101; 
@@ -63,22 +61,91 @@ always @(opcode)
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b1;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b110; 
       end
-	  6'b1111xx:            // Oper. Alu (-B)
+// ###################################### TRABAJANDO CON REGISTROS ##########################################	
+	  6'b010000:            // Oper. Alu (A)
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b0;
+        we3 = 1'b1;
+        wez = 1'b1;
+        op_alu = 3'b000; 
+      end
+	  6'b010001:            // Oper. Alu (A negado) 
+      begin
+        s_inc = 1'b1;
+        s_inm = 1'b0;
+        s_mux_datos = 1'b0;
+        we3 = 1'b1;
+        wez = 1'b1;
+        op_alu = 3'b001; 
+      end 
+	  6'b010010:            // Oper. Alu (A + B)
+      begin
+        s_inc = 1'b1;
+        s_inm = 1'b0;
+        s_mux_datos = 1'b0;
+        we3 = 1'b1;
+        wez = 1'b1;
+        op_alu = 3'b010; 
+      end
+    6'b010011:            // Oper. Alu (A - B)
+      begin
+        s_inc = 1'b1;
+        s_inm = 1'b0;
+        s_mux_datos = 1'b0; 
+        we3 = 1'b1;
+        wez = 1'b1;
+        op_alu = 3'b011; 
+      end   
+    6'b010100:            // Oper. Alu (A AND B)
+      begin
+        s_inc = 1'b1;
+        s_inm = 1'b0;
+        s_mux_datos = 1'b0;
+        we3 = 1'b1;
+        wez = 1'b1;
+        op_alu = 3'b100; 
+      end
+    6'b010101:            // Oper. Alu (A OR B)
+      begin
+        s_inc = 1'b1;
+        s_inm = 1'b0;
+        s_mux_datos = 1'b0; 
+        we3 = 1'b1;
+        wez = 1'b1;
+        op_alu = 3'b101; 
+      end
+    6'b010110:            // Oper. Alu (-A)
+      begin
+        s_inc = 1'b1;
+        s_inm = 1'b0;
+        s_mux_datos = 1'b0;
+        we3 = 1'b1;
+        wez = 1'b1;
+        op_alu = 3'b110; 
+      end
+	  6'b010111:            // Oper. Alu (-B)
+      begin
+        s_inc = 1'b1;
+        s_inm = 1'b0;
+        s_mux_datos = 1'b0; 
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b111; 
       end
+
+// ################################ INSTRUCCIONES DE SALTO #####################################
     6'b000100:            // Salto incondicional
       begin
         s_inc = 1'b0;
         s_inm = 1'b0;
+        s_mux_datos = 1'b0;
         we3 = 1'b0;
         wez = 1'b0;
         op_alu = 3'b000; 
@@ -87,6 +154,7 @@ always @(opcode)
       begin
         s_inc = z ? 1'b0:1'b1;
         s_inm = 1'b0;
+        s_mux_datos = 1'b0; 
         we3 = 1'b0;
         wez = 1'b0;
         op_alu =3'b000;
@@ -95,6 +163,7 @@ always @(opcode)
       begin
         s_inc = z ? 1'b1:1'b0;
         s_inm = 1'b0;
+        s_mux_datos = 1'b0; 
         we3 = 1'b0;
         wez = 1'b0;
         op_alu = 3'b000;
@@ -103,6 +172,7 @@ always @(opcode)
       begin
         s_inc = 1'b0;
         s_inm = 1'b0;
+        s_mux_datos = 1'b0;
         we3 = 1'b0;
         wez = 1'b0;
         op_alu = 3'b000; 
