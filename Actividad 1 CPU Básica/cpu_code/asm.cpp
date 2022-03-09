@@ -17,11 +17,11 @@
 
 //Nemónico de cada instrucción
 
-const char* mnemonics[] = { "mov", "cpl", ...  , "nop" };
+const char* mnemonics[] = {"li", "noti", "addi", "subi", "andi", "ori", "negi", "mov", "not", "add", "sub", "and", "or", "neg", "j", "jz", "jnz"};
 
 //Opcode de cada instrucción
 
-const char* opcodes[] = { "0000", "0001", ... , "111011" };
+const char* opcodes[] = { "1000", "1001", "1010", "1011", "1100", "1101", "1110", "010000", "010001", "010010", "010011", "010100", "010101", "010110", "000100", "000101", "000110"};
 
 // Operandos
 
@@ -29,7 +29,7 @@ const char* opcodes[] = { "0000", "0001", ... , "111011" };
 
 // Codificación de los operandos de cada instrucción (C: cte datos, D: cte de dirección de código, R: campo de registro)
 
-const char* operands[] = { "CR", "CR", ... , "" };
+const char* operands[] = { "RC", "RC", "RRC", "RRC", "RRC", "RRC", "RC", "RR", "RR", "RRR", "RRR", "RRR", "RRR", "RR", "D", "D"};
 
 //Tamaños de operandos
 #define CONSTANTSIZE 16     //Tamaño en bits de una constante C (o dirección de datos si así se considera)
@@ -39,10 +39,23 @@ const char* operands[] = { "CR", "CR", ... , "" };
 #define NUMINS (sizeof(mnemonics)/sizeof(mnemonics[0]))     //Número de instrucciones deducido de la matriz de nemónicos
 
 //Posiciones (bit más significativo) de los operandos en la instrucción (de INSTSIZE-1 a 1), 0 significa no usado (no hay operandos de sólo 1 bit)
-const int posoper[NUMINS][MAXNUMOPER] = { {11, 3, 0},
-                                          {11, 3, 0},
-                                             ...
-                                          {0, 0, 0} };
+const int posoper[NUMINS][MAXNUMOPER] = { {25, 15, 0},
+                                          {25, 15, 0},
+                                          {25, 21, 15},
+                                          {25, 21, 15},
+                                          {25, 21, 15},
+                                          {25, 21, 15},
+                                          {25, 15, 0},
+                                          {25, 21, 0},
+                                          {25, 21, 0},
+                                          {25, 21, 17},
+                                          {25, 21, 17},
+                                          {25, 21, 17},
+                                          {25, 21, 17},
+                                          {25, 21, 0},
+                                          {25, 9, 0},
+                                          {25, 9, 0},
+                                          {25, 9, 0}};
 
 //*************************************************************************************************************************************************************************
 // Normalmente no sería necesario tocar el código de más abajo para adaptar a un ensamblador nuevo, salvo modificaciones en codificación de parámetros como salto relativo
@@ -506,8 +519,8 @@ void ensambla(char* srcfilename, char* dstfilename)
 }
 
 int main(int argc, char* argv[]){
-    char srcfilename[] = "test.asm";
-    char dstfilename[] = "test.mem";
+    char srcfilename[] = "progasm.asm";
+    char dstfilename[] = "progfile.mem";
 
     ensambla(srcfilename, dstfilename);
     

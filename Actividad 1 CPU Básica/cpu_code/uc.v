@@ -6,8 +6,8 @@ always @(opcode)
 	  6'b1000xx:            // Oper. Alu (A)
       begin
         s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b1;
+        s_inm = 1'b1;
+        s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b000; 
@@ -15,8 +15,8 @@ always @(opcode)
     6'b1001xx:            // Oper. Alu (A negado) 
       begin
         s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b1;
+        s_inm = 1'b1;
+        s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b001; 
@@ -24,8 +24,8 @@ always @(opcode)
     6'b1010xx:            // Oper. Alu (A + B)
       begin
         s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b1;
+        s_inm = 1'b1;
+        s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b010; 
@@ -33,8 +33,8 @@ always @(opcode)
     6'b1011xx:            // Oper. Alu (A - B)
       begin
         s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b1;
+        s_inm = 1'b1;
+        s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b011; 
@@ -42,8 +42,8 @@ always @(opcode)
     6'b1100xx:            // Oper. Alu (A AND B)
       begin
         s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b1;
+        s_inm = 1'b1;
+        s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b100; 
@@ -51,8 +51,8 @@ always @(opcode)
     6'b1101xx:           // Oper. Alu (A OR B)
       begin
         s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b1;
+        s_inm = 1'b1;
+        s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b101; 
@@ -60,8 +60,8 @@ always @(opcode)
     6'b1110xx:            // Oper. Alu (-A)
       begin
         s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b1;
+        s_inm = 1'b1;
+        s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b110; 
@@ -129,15 +129,6 @@ always @(opcode)
         we3 = 1'b1;
         wez = 1'b1;
         op_alu = 3'b110; 
-      end
-	  6'b010111:            // Oper. Alu (-B)
-      begin
-        s_inc = 1'b1;
-        s_inm = 1'b0;
-        s_mux_datos = 1'b0; 
-        we3 = 1'b1;
-        wez = 1'b1;
-        op_alu = 3'b111; 
       end
 
 // ################################ INSTRUCCIONES DE SALTO #####################################
