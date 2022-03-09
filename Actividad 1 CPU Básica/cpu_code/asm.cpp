@@ -53,9 +53,9 @@ const int posoper[NUMINS][MAXNUMOPER] = { {25, 15, 0},
                                           {25, 21, 17},
                                           {25, 21, 17},
                                           {25, 21, 0},
-                                          {25, 9, 0},
-                                          {25, 9, 0},
-                                          {25, 9, 0}};
+                                          {9, 0, 0},
+                                          {9, 0, 0},
+                                          {9, 0, 0}};
 
 //*************************************************************************************************************************************************************************
 // Normalmente no sería necesario tocar el código de más abajo para adaptar a un ensamblador nuevo, salvo modificaciones en codificación de parámetros como salto relativo
@@ -510,7 +510,7 @@ void ensambla(char* srcfilename, char* dstfilename)
     }
     else {
         if (outfile != NULL) {
-            for (int i = 0; i < counter; i++) {
+            for (int i = 0; i < MAXPROGRAMLEN; i++) {
                 fprintf(outfile, "%s\n", progmem[i]);
             }
             fclose(outfile);
