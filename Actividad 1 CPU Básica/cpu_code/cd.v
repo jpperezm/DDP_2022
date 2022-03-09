@@ -12,7 +12,7 @@ registro #(10) pc (clk, reset, mux_pc, salida_pc);
 sum sumador(salida_pc, 10'b0000000001, sum_mux);
 mux2 #(10) mux_a(instruccion[9:0], sum_mux, s_inc, mux_pc);
 regfile banco_registros(clk, we3, instruccion[25:22], instruccion[21:18], instruccion[17:14], wd3, rd1, rd2);
-alu alu_cpu(mux_alu, rd2, op_alu, alu_mux, aluffz);
+alu alu_cpu(mux_alu, rd2, op_alu, s_mux_alu, alu_mux, aluffz);
 mux2 mux_b(alu_mux, Datos, s_mux_datos, wd3);
 mux2 mux_inm(rd1, instruccion[15:0], s_mux_alu, mux_alu);
 ffd ffz(clk, reset, aluffz, wez, z);

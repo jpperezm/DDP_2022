@@ -1,5 +1,6 @@
 module alu(input wire [15:0] a, b,
            input wire [2:0] op_alu,
+           input wire s_inm,
            output wire [15:0] y,
            output wire zero);
 
@@ -11,12 +12,12 @@ begin
     3'b000: s = a;
     3'b001: s = ~a;
     3'b010: s = a + b;
-    3'b011: s = a - b;
+    3'b011: s = s_inm ? (b - a) : (a - b);
     3'b100: s = a & b;
     3'b101: s = a | b;
     3'b110: s = -a;
     3'b111: s = -b;
-	default: s = 'bx; //desconocido en cualquier otro caso (x � z), por si se modifica el c�digo
+	default: s = 'bx; //desconocido en cualquier otro caso (x � z), por si se modifica el c�digo     
   endcase
 end
 
