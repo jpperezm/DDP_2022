@@ -67,7 +67,7 @@ always @(opcode)
         op_alu = 3'b110; 
       end
 // ###################################### TRABAJANDO CON REGISTROS ##########################################	
-	  6'b010000:            // Oper. Alu (A)
+	  6'b010000:            // Oper. Alu (A) MOV
       begin
         s_inc = 1'b1;
         s_inm = 1'b0;
@@ -128,7 +128,7 @@ always @(opcode)
         s_mux_datos = 1'b0;
         we3 = 1'b1;
         wez = 1'b1;
-        op_alu = 3'b110; 
+        op_alu = 3'b111; 
       end
 
 // ################################ INSTRUCCIONES DE SALTO #####################################
