@@ -25,8 +25,10 @@ begin
   $dumpfile("cpu_tb.vcd");
   $dumpvars;
   for (regid = 0; regid < 16; regid = regid + 1)
-    $dumpvars(16'b0000000000000000, cpu_tb.micpu.cam_dat.banco_registros.regb[regid]);
-
+    begin
+      $dumpvars(16'b0, cpu_tb.micpu.cam_dat.banco_registros.regb[regid]);
+      $dumpvars(10'b0, cpu_tb.micpu.cam_dat.stack.stackmem[regid]);
+    end
   reset = 1;  //a partir del flanco de subida del reset empieza el funcionamiento normal
   #10;
   reset = 0;  //bajamos el reset 
@@ -40,7 +42,10 @@ begin
   for (regid = 0; regid < 16; regid = regid + 1)
     registros[regid] = cpu_tb.micpu.cam_dat.banco_registros.regb[regid];
 
-  $write("R1 = %d\nR2 = %d\nR3 = %d\nR4 = %d\nR5 = %d\nR6 = %d\n", registros[1], registros[2], registros[3], registros[4], registros[5], registros[6]);
+  for (regid = 0; regid < 16; regid = regid + 1)
+    $write("R%d = %d\n", regid, registros[regid]);  
+
+  
   $finish;
 end
 
