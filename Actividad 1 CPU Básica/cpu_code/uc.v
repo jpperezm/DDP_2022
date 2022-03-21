@@ -3,7 +3,7 @@ module uc(input wire [5:0] opcode, input wire z, output reg s_mux_datos, s_inc, 
 always @(opcode)
   casex (opcode)
 // ##################################### TRAJANDO CON INMEDIATO ##############################################
-	  6'b1000xx:            // Oper. Alu (A)
+	  6'b1000xx:           // Oper. Alu (A)
       begin
         s_inc = 1'b1;
         s_inm = 1'b1;
