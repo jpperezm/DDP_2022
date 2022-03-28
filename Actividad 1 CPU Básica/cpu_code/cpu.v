@@ -6,7 +6,7 @@ wire [2:0] op_alu;
 wire [15:0] Datos, Direcciones;
 wire s_inc, s_inm, s_mux_datos, we3, wez, z, s_stack_mux, push, pop;
 
-cd cam_dat(clk, reset, push, pop, oe, s_stack_mux, s_inc, s_inm, s_mux_datos, we3, wez, Datos, op_alu, Direcciones, z, opcode);
-uc uni_control(opcode, z, s_mux_datos, s_inc, s_inm, we3, wez, s_stack_mux, oe, push, pop, op_alu);
+cd cam_dat(clk, reset, push, pop, transceiver_oe, s_stack_mux, s_inc, s_inm, s_mux_datos, we3, wez, Datos, op_alu, Direcciones, z, opcode);
+uc uni_control(opcode, z, s_mux_datos, s_inc, s_inm, we3, wez, s_stack_mux, transceiver_oe, push, pop, op_alu);
 
 endmodule

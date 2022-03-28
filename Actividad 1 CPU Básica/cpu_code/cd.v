@@ -1,4 +1,9 @@
-module cd(input wire clk, reset, push, pop, oe, s_stack_mux, s_inc, s_mux_alu, s_mux_datos, we3, wez, input wire [15:0] Datos, input wire [2:0] op_alu, output wire [15:0] Direcciones, output wire z, output wire [5:0] opcode);
+module cd(input wire clk, reset, push, pop, transceiver_oe, s_stack_mux, s_inc, s_mux_alu, s_mux_datos, we3, wez, 
+          input wire [15:0] Datos, 
+          input wire [2:0] op_alu, 
+          output wire [15:0] Direcciones,
+          output wire z, 
+          output wire [5:0] opcode);
 //Camino de datos de instrucciones de un solo ciclo
 
 wire [31:0] instruccion;
@@ -16,7 +21,7 @@ alu alu_cpu(mux_alu, rd2, op_alu, s_mux_alu, alu_mux, aluffz);
 mux2 mux_b(alu_mux, trans_mux, s_mux_datos, wd3);
 mux2 mux_inm(rd1, instruccion[15:0], s_mux_alu, mux_alu);
 ffd ffz(clk, reset, aluffz, wez, z);
-transceiver transc1(clk, reset, oe, rd1, trans_mux, Datos);
+transceiver transc1(clk, reset, transceiver_oe, rd1, trans_mux, Datos);
 pila stack(clk, reset, push, pop, salida_pc, stack_mux);
 mux2 #(10) mux_pila(mux2mux, stack_mux, s_stack_mux, mux_pc);
 

@@ -17,11 +17,11 @@
 
 //Nemónico de cada instrucción
 
-const char* mnemonics[] = {"li", "noti", "addi", "subi", "andi", "ori", "negi", "mov", "not", "add", "sub", "and", "or", "neg", "j", "jz", "jnz", "jcall", "jr"};
+const char* mnemonics[] = {"li", "noti", "addi", "subi", "andi", "ori", "negi", "mov", "not", "add", "sub", "and", "or", "neg", "j", "jz", "jnz", "jcall", "jr", "jrintr"};
 
 //Opcode de cada instrucción
 
-const char* opcodes[] = { "1000", "1001", "1010", "1011", "1100", "1101", "1110", "010000", "010001", "010010", "010011", "010100", "010101", "010110", "001000", "001001", "001010", "001011", "001100"};
+const char* opcodes[] = { "1000", "1001", "1010", "1011", "1100", "1101", "1110", "010000", "010001", "010010", "010011", "010100", "010101", "010110", "001000", "001001", "001010", "001011", "001100", "001101"};
 
 // Operandos
 
@@ -29,7 +29,7 @@ const char* opcodes[] = { "1000", "1001", "1010", "1011", "1100", "1101", "1110"
 
 // Codificación de los operandos de cada instrucción (C: cte datos, D: cte de dirección de código, R: campo de registro)
 
-const char* operands[] = { "RC", "RC", "RRC", "RRC", "RRC", "RRC", "RC", "RR", "RR", "RRR", "RRR", "RRR", "RRR", "RR", "D", "D", "D", "D", ""};
+const char* operands[] = { "RC", "RC", "RRC", "RRC", "RRC", "RRC", "RC", "RR", "RR", "RRR", "RRR", "RRR", "RRR", "RR", "D", "D", "D", "D", "", ""};
 
 //Tamaños de operandos
 #define CONSTANTSIZE 16     //Tamaño en bits de una constante C (o dirección de datos si así se considera)
@@ -57,7 +57,8 @@ const int posoper[NUMINS][MAXNUMOPER] = { {25, 15, 0},  // LI
                                           {9, 0, 0},    // JZ
                                           {9, 0, 0},    // JNZ
                                           {9, 0, 0},    // JCALL
-                                          {0, 0, 0}};   // JR
+                                          {0, 0, 0},    // JR
+                                          {0, 0, 0}};   // JRINTR
 
 //*************************************************************************************************************************************************************************
 // Normalmente no sería necesario tocar el código de más abajo para adaptar a un ensamblador nuevo, salvo modificaciones en codificación de parámetros como salto relativo

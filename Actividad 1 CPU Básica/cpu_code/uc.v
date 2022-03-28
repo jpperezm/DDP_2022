@@ -1,6 +1,13 @@
-module uc(input wire [5:0] opcode, input wire z, output reg s_mux_datos, s_inc, s_inm, we3, wez, s_stack_mux, oe, push, pop, output reg [2:0] op_alu);
+module uc(input wire [5:0] opcode, 
+          input wire z, s_stop_opcode,
+          output reg s_mux_datos, s_inc, s_inm, we3, wez, s_stack_mux, transceiver_oe, push, pop, s_return_intr,
+          output reg [2:0] op_alu);
 
 always @(opcode)
+  if (s_stop_opcode == 1'b1)
+    begin 
+      
+    end
   casex (opcode)
 // ##################################### TRAJANDO CON INMEDIATO ##############################################
 	  6'b1000xx:           // Oper. Alu (A)
@@ -14,6 +21,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0;
+        s_return_intr = 1'b0;
       end
     6'b1001xx:            // Oper. Alu (A negado) 
       begin
@@ -26,6 +34,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0;
+        s_return_intr = 1'b0;
       end
     6'b1010xx:            // Oper. Alu (A + B)
       begin
@@ -38,6 +47,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
     6'b1011xx:            // Oper. Alu (A - B)
       begin
@@ -50,6 +60,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
     6'b1100xx:            // Oper. Alu (A AND B)
       begin
@@ -62,6 +73,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
     6'b1101xx:           // Oper. Alu (A OR B)
       begin
@@ -74,6 +86,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
     6'b1110xx:            // Oper. Alu (-A)
       begin
@@ -86,6 +99,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
 // ###################################### TRABAJANDO CON REGISTROS ##########################################	
 	  6'b010000:            // Oper. Alu (A) MOV
@@ -99,6 +113,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
 	  6'b010001:            // Oper. Alu (A negado) 
       begin
@@ -111,6 +126,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end 
 	  6'b010010:            // Oper. Alu (A + B)
       begin
@@ -123,6 +139,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
     6'b010011:            // Oper. Alu (A - B)
       begin
@@ -135,6 +152,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end   
     6'b010100:            // Oper. Alu (A AND B)
       begin
@@ -147,6 +165,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
     6'b010101:            // Oper. Alu (A OR B)
       begin
@@ -158,7 +177,8 @@ always @(opcode)
         op_alu = 3'b101;
         s_stack_mux = 1'b0;
         push = 1'b0;
-        pop = 1'b0; 
+        pop = 1'b0;
+        s_return_intr = 1'b0; 
       end
     6'b010110:            // Oper. Alu (-A)
       begin
@@ -171,6 +191,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
 
 // ################################ INSTRUCCIONES DE SALTO #####################################
@@ -185,6 +206,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0; 
+        s_return_intr = 1'b0;
       end
     6'b001001:            // Salto condicional si z
       begin
@@ -197,6 +219,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0;
+        s_return_intr = 1'b0;
       end
     6'b001010:            // Salto condicional si no z
       begin
@@ -209,6 +232,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0;
+        s_return_intr = 1'b0;
       end
     6'b001011:            // Salto a subrutina. PUSH  JCALL
       begin
@@ -221,6 +245,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b1;
         pop = 1'b0;
+        s_return_intr = 1'b0;
       end
     6'b001100:            // Salto de vuelta de subrutina. POP JR
       begin
@@ -233,6 +258,7 @@ always @(opcode)
         s_stack_mux = 1'b1;
         push = 1'b0;
         pop = 1'b1;
+        s_return_intr = 1'b0;
       end
     default: 
       begin
@@ -245,6 +271,7 @@ always @(opcode)
         s_stack_mux = 1'b0;
         push = 1'b0;
         pop = 1'b0;
+        s_return_intr = 1'b0;
       end
   endcase
 
