@@ -56,6 +56,16 @@ module mux2 #(parameter WIDTH = 16)
 
 endmodule
 
+//modulo multiplexor, si s=1 sale d1, s=0 sale d0
+module mux4 #(parameter WIDTH = 16)
+             (input  wire [WIDTH-1:0] d0, d1, d2,
+              input  wire [1:0]        s, 
+              output wire [WIDTH-1:0] y);
+
+  assign y = (s == 2'b11) ? d1 : (s == 2'b0) ? d0 : (s == 2'b01) ? d2 : 2'bx; 
+
+endmodule
+
 //Biestable para el flag de cero
 //Biestable tipo D s�ncrono con reset as�ncrono por flanco y entrada de habilitaci�n de carga
 module ffd(input wire clk, reset, d, carga, output reg q);
@@ -66,7 +76,7 @@ module ffd(input wire clk, reset, d, carga, output reg q);
 	  else
 	    if (carga)
 	      q <= d;
-
+        
 endmodule 
 
 // Transceiver

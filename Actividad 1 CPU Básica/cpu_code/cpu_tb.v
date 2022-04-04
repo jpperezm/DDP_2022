@@ -4,6 +4,8 @@ module cpu_tb;
 
 
 reg clk, reset;
+reg [7:0] intr;
+wire [15:0] Datos, Direcciones;
 
 
 // generación de reloj clk
@@ -16,7 +18,7 @@ begin
 end
 
 // instanciación del procesador
-cpu micpu(clk, reset);
+cpu micpu(clk, reset, intr, Direcciones, Datos);
 
 integer regid;
 
@@ -32,6 +34,17 @@ begin
   reset = 1;  //a partir del flanco de subida del reset empieza el funcionamiento normal
   #10;
   reset = 0;  //bajamos el reset 
+
+  #50
+  intr = 8'b00010001;
+  #10
+  intr = 8'b0;
+
+  #185
+  intr = 8'b10100010;
+  #60
+  intr = 8'b0;
+
 end
 
 reg signed [15:0] registros [15:0];

@@ -128,6 +128,24 @@ void convBin(unsigned int number, char* destStr, size_t numchars) {
     }
 }
 
+int pow(int n, int p) {
+    int acc = 1;
+    for (int i = 0; i < p; i++)
+        acc *= n;
+    return acc;
+}
+
+int convertBinaryToDecimal(int n) {
+    int decimalNumber = 0, i = 0, remainder;
+    while (n != 0) {
+        remainder = n % 10;
+        n /= 10;
+        decimalNumber += remainder*pow(2,i);
+        ++i;
+    }
+    return decimalNumber;
+}
+
 int findStr(const char* str, const char** liststr, int nelem) {
     int i;
     for (i = 0; i < nelem; i++) {
@@ -304,7 +322,7 @@ void processMnemonic(FILE* file, char* line, int numread, bool *code, int srclin
                 printf("Error buscando operando %d en la línea %d\n", i + 1, srcline);
                 exit(1);
             }
-            //Ahora convertimos el operando cte, de registro o simbolico resuelto en instrucc (el no resuelto estará a cero)
+            //Ahora convertimos el operando cte, de registro o simbolico resuelto en instrucc (el no resuelto estará a cero)   
             convBin(ops[i], instrucc + (INSTSIZE - 1) - posoper[id][i], operNumBits(id, i));
 
             //Inicializa cadenas de formato de siguientes operandos
@@ -505,6 +523,9 @@ void ensambla(char* srcfilename, char* dstfilename)
         }
         convBin(value, progmem[tablaR[i].PosRef] + (INSTSIZE - 1) - tablaR[i].BitPos, tablaR[i].Size);
     }
+
+    for (int i = 0; i < 40; i++)
+        convBin(convertBinaryToDecimal(atoi(opcodes[19])), progmem[1008 + i] + (INSTSIZE - 1) - 31, 6); // opcode de reti en decimal opcodes[24] 
 
     if ((outfile = fopen(dstfilename, "w")) == NULL) //Se abre en modo texto
     {

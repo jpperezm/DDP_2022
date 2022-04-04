@@ -1,0 +1,77 @@
+[*]
+[*] GTKWave Analyzer v3.3.104 (w)1999-2020 BSI
+[*] Mon Apr  4 16:34:22 2022
+[*]
+[dumpfile] "/home/jaime/Desktop/DDP repo/Actividad 1 CPU Básica/cpu_code/cpu_tb.vcd"
+[dumpfile_mtime] "Mon Apr  4 16:31:43 2022"
+[dumpfile_size] 41947
+[savefile] "/home/jaime/Desktop/DDP repo/Actividad 1 CPU Básica/cpu_code/gtkwave_cpu.gtkw"
+[timestart] 0
+[size] 1920 1007
+[pos] -1 -1
+*-16.891958 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1 -1
+[treeopen] cpu_tb.
+[treeopen] cpu_tb.micpu.
+[treeopen] cpu_tb.micpu.cam_dat.
+[treeopen] cpu_tb.micpu.gestor_intr.
+[sst_width] 219
+[signals_width] 215
+[sst_expanded] 1
+[sst_vpaned_height] 458
+@800200
+-TestBench
+@28
+cpu_tb.clk
+cpu_tb.intr[7:0]
+@1000200
+-TestBench
+@800200
+-CD
+@24
+cpu_tb.micpu.cam_dat.salida_pc[9:0]
+@28
+cpu_tb.micpu.cam_dat.intr_deco.intr_selec[7:0]
+cpu_tb.micpu.cam_dat.intr_deco.intr_dir_out[9:0]
+@1000200
+-CD
+@800200
+-Gestor_intr
+@28
+cpu_tb.micpu.gestor_intr.call_intr[7:0]
+cpu_tb.micpu.gestor_intr.interrupt_in[7:0]
+cpu_tb.micpu.gestor_intr.interrupt_out[7:0]
+cpu_tb.micpu.gestor_intr.data_s[7:0]
+cpu_tb.micpu.gestor_intr.data_a[7:0]
+cpu_tb.micpu.gestor_intr.intr_a[7:0]
+cpu_tb.micpu.gestor_intr.intr_s[7:0]
+cpu_tb.micpu.gestor_intr.min_bit_a[7:0]
+cpu_tb.micpu.gestor_intr.min_bit_s[7:0]
+cpu_tb.micpu.gestor_intr.s_return_intr[7:0]
+@1000200
+-Gestor_intr
+@800200
+-UC
+@28
+cpu_tb.micpu.uni_control.opcode[5:0]
+cpu_tb.micpu.uni_control.min_bit_s[7:0]
+cpu_tb.micpu.uni_control.min_bit_a[7:0]
+cpu_tb.micpu.uni_control.z
+cpu_tb.micpu.uni_control.wez
+cpu_tb.micpu.uni_control.we3
+cpu_tb.micpu.uni_control.s_return_intr[7:0]
+cpu_tb.micpu.uni_control.s_intr
+cpu_tb.micpu.uni_control.s_mux_datos
+cpu_tb.micpu.uni_control.s_stack_mux
+cpu_tb.micpu.uni_control.s_inm
+cpu_tb.micpu.uni_control.s_inc[1:0]
+@29
+cpu_tb.micpu.uni_control.push
+@28
+cpu_tb.micpu.uni_control.pop
+cpu_tb.micpu.uni_control.op_alu[2:0]
+cpu_tb.micpu.uni_control.s_call_intr[7:0]
+cpu_tb.micpu.uni_control.transceiver_oe
+@1000200
+-UC
+[pattern_trace] 1
+[pattern_trace] 0

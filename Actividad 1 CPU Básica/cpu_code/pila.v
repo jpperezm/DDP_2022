@@ -1,4 +1,4 @@
-module pila(input wire clk, reset, push, pop, input wire [9:0] dato, output wire [9:0] data_out);
+module pila(input wire clk, reset, push, pop, s_intr, input wire [9:0] dato, output wire [9:0] data_out);
   reg [9:0] stackmem[0:15]; //memoria de 16 palabras de 10 bits de ancho
   reg [15:0] sp;
 
@@ -17,6 +17,6 @@ module pila(input wire clk, reset, push, pop, input wire [9:0] dato, output wire
         sp <= sp - 16'b1;
     end
 
-    assign data_out = stackmem[sp];
+    assign data_out = s_intr ? stackmem[sp] - 10'b1 : stackmem[sp];
 
 endmodule
