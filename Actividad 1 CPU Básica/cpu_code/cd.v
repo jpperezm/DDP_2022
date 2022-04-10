@@ -24,10 +24,11 @@ alu alu_cpu(mux_alu, rd2, op_alu, s_mux_alu, alu_mux, aluffz);
 mux2 mux_b(alu_mux, trans_mux, s_mux_datos, wd3);
 mux2 mux_inm(rd1, instruccion[15:0], s_mux_alu, mux_alu);
 ffd ffz(clk, reset, aluffz, wez, z);
-transceiver transc1(clk, reset, transceiver_oe, rd1, trans_mux, Datos);
+transceiver transc1(clk, reset, transceiver_oe, rd2, trans_mux, Datos);
 pila stack(clk, reset, push, pop, s_intr, salida_pc, stack_mux);
 mux2 #(10) mux_pila(mux2mux, stack_mux, s_stack_mux, mux_pc);
 
+assign Direcciones = alu_mux;
 assign opcode = instruccion[31:26];
 
 endmodule

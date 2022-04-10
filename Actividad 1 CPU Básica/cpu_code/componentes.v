@@ -46,6 +46,18 @@ module registro #(parameter WIDTH = 16)
 
 endmodule
 
+//modulo registro para modelar el PC, cambia en cada flanco de subida de reloj o de reset
+module registro_ce #(parameter WIDTH = 16)
+              (input wire clk, reset, ce,
+               input wire [WIDTH-1:0] d, 
+               output reg [WIDTH-1:0] q);
+
+  always @(posedge clk, posedge reset)
+    if (reset) q <= 0;
+    else if(ce) q <= d;
+
+endmodule
+
 //modulo multiplexor, si s=1 sale d1, s=0 sale d0
 module mux2 #(parameter WIDTH = 16)
              (input  wire [WIDTH-1:0] d0, d1, 

@@ -5,7 +5,13 @@ module cpu_tb;
 
 reg clk, reset;
 reg [7:0] intr;
-wire [15:0] Datos, Direcciones;
+wire [15:0] Datos;
+wire [17:0] Direcciones;
+wire [4:0] sram_control;
+reg [3:0] buttons;
+reg [9:0] switches;
+wire [7:0] g_led;
+wire [9:0] r_led;
 
 
 // generación de reloj clk
@@ -18,7 +24,7 @@ begin
 end
 
 // instanciación del procesador
-cpu micpu(clk, reset, intr, Direcciones, Datos);
+dataloger micpu(clk, reset, buttons, switches, sram_control, g_led, r_led, Direcciones, Datos);
 
 integer regid;
 
@@ -28,22 +34,24 @@ begin
   $dumpvars;
   for (regid = 0; regid < 16; regid = regid + 1)
     begin
-      $dumpvars(16'b0, cpu_tb.micpu.cam_dat.banco_registros.regb[regid]);
-      $dumpvars(10'b0, cpu_tb.micpu.cam_dat.stack.stackmem[regid]);
+      $dumpvars(16'b0, cpu_tb.micpu.procesador.cam_dat.banco_registros.regb[regid]);
+      $dumpvars(10'b0, cpu_tb.micpu.procesador.cam_dat.stack.stackmem[regid]);
     end
   reset = 1;  //a partir del flanco de subida del reset empieza el funcionamiento normal
   #10;
+  buttons = 4'b1111;
   reset = 0;  //bajamos el reset 
 
-  #50
-  intr = 8'b00010001;
-  #10
-  intr = 8'b0;
 
-  #185
-  intr = 8'b10100010;
+  #200
+  buttons = 4'b1110;
   #60
-  intr = 8'b0;
+  buttons = 4'b1111;
+
+/*   #100
+  buttons = 4'b1110;
+  #60
+  buttons = 4'b1111; */
 
 end
 
@@ -53,7 +61,7 @@ initial
 begin
   #(600*90);  //Esperamos 9 ciclos o 9 instrucciones  
   for (regid = 0; regid < 16; regid = regid + 1)
-    registros[regid] = cpu_tb.micpu.cam_dat.banco_registros.regb[regid];
+    registros[regid] = cpu_tb.micpu.procesador.cam_dat.banco_registros.regb[regid];
 
   for (regid = 0; regid < 16; regid = regid + 1)
     $write("R%d = %d\n", regid, registros[regid]);  
