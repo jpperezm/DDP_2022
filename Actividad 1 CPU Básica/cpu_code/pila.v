@@ -7,13 +7,14 @@ module pila(input wire clk, reset, push, pop, s_intr, input wire [9:0] dato, out
 
   always @(posedge clk, posedge reset)
     begin
-      if(push == 1'b1)
+      if(reset)
+        sp <= 16'b0;
+      else if(push == 1'b1)
         begin
           sp <= sp + 16'b1;
           stackmem[sp + 16'b1] <= dato + 10'b1;
         end
-
-      if(pop == 1'b1)
+      else if(pop == 1'b1)
         sp <= sp - 16'b1;
     end
 

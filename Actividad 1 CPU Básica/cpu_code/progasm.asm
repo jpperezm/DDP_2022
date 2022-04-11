@@ -1,6 +1,6 @@
+li R1, 65535
 li R2, 1
-mov R4, R2
-li R3, 65535
+li R3, 2
 
 pepe:
     addi R0, R0, 0

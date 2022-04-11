@@ -11,8 +11,13 @@ wire [7:0] gled_out;
 reg ce_g, ce_r;
 reg [15:0] data_reg;
 
-registro_ce #(10) r_reg (clk, reset, ce_r, ~data_inout[9:0], rled_out);
-registro_ce #(8) g_reg (clk, reset, ce_g, ~data_inout[7:0], gled_out);  
+initial
+  begin
+    data_reg = 16'b0;
+  end
+
+registro_ce #(10) r_reg (clk, reset, ce_r, data_inout[9:0] | rled_out, rled_out);
+registro_ce #(8) g_reg (clk, reset, ce_g, data_inout[7:0] | gled_out, gled_out);  
 
 always @(dir_in)
   begin

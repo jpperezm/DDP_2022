@@ -475,10 +475,9 @@ int eatWhitespaceAndComments(FILE* file, int* linecount) {
     } while (1);
 }
 
-void ensambla(char* srcfilename, char* dstfilename)
+void ensambla(char* srcfilename, char* dstfilename, int counter)
 {
     FILE *infile, *outfile;
-    int counter = 0;
     int currentline = 1;
     bool codEmitido = false;
 
@@ -488,10 +487,12 @@ void ensambla(char* srcfilename, char* dstfilename)
         exit(1);
     }
 
-    //Inicializa toda la memoria de programa a '0':
-    memset(progmem, '0', MAXPROGRAMLEN * (INSTSIZE + 1));
-    for (int i = 0; i < MAXPROGRAMLEN; i++) {
-        *((char *)progmem + i * (long long)(INSTSIZE + 1) + INSTSIZE) = '\0'; //Cada instrucción como una cadena con "0"s acabada en '\0'
+    if (!counter) {
+        //Inicializa toda la memoria de programa a '0':
+        memset(progmem, '0', MAXPROGRAMLEN * (INSTSIZE + 1));
+        for (int i = 0; i < MAXPROGRAMLEN; i++) {
+            *((char *)progmem + i * (long long)(INSTSIZE + 1) + INSTSIZE) = '\0'; //Cada instrucción como una cadena con "0"s acabada en '\0'
+        }
     }
 
     //Ahora por cada línea de código
@@ -526,9 +527,6 @@ void ensambla(char* srcfilename, char* dstfilename)
         convBin(value, progmem[tablaR[i].PosRef] + (INSTSIZE - 1) - tablaR[i].BitPos, tablaR[i].Size);
     }
 
-    for (int i = 0; i < 40; i++)
-        convBin(convertBinaryToDecimal(atoi(opcodes[19])), progmem[1008 + i] + (INSTSIZE - 1) - 31, 6); // opcode de reti en decimal opcodes[24] 
-
     if ((outfile = fopen(dstfilename, "w")) == NULL) //Se abre en modo texto
     {
         printf("ERROR: dest file open failed\n");
@@ -547,7 +545,22 @@ void ensambla(char* srcfilename, char* dstfilename)
 int main(int argc, char* argv[]){
     char srcfilename[] = "progasm.asm";
     char dstfilename[] = "progfile.mem";
+    char interrupt1[] = "intr_code/intr1.asm";
+    char interrupt2[] = "intr_code/intr2.asm";
+    char interrupt3[] = "intr_code/intr3.asm";
+    char interrupt4[] = "intr_code/intr4.asm";
+    char interrupt5[] = "intr_code/intr5.asm";
+    char interrupt6[] = "intr_code/intr6.asm";
+    char interrupt7[] = "intr_code/intr7.asm";
+    char interrupt8[] = "intr_code/intr8.asm";
 
-    ensambla(srcfilename, dstfilename);
-    
+    ensambla(srcfilename, dstfilename, 0);
+    ensambla(interrupt1, dstfilename, 860);
+    ensambla(interrupt2, dstfilename, 880);
+    ensambla(interrupt3, dstfilename, 900);
+    ensambla(interrupt4, dstfilename, 920);
+    ensambla(interrupt5, dstfilename, 940);
+    ensambla(interrupt6, dstfilename, 960);
+    ensambla(interrupt7, dstfilename, 980);
+    ensambla(interrupt8, dstfilename, 1000);
 }

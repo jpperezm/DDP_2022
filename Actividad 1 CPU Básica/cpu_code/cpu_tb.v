@@ -48,10 +48,10 @@ begin
   #60
   buttons = 4'b1111;
 
-/*   #100
-  buttons = 4'b1110;
+  #200
+  buttons = 4'b1101;
   #60
-  buttons = 4'b1111; */
+  buttons = 4'b1111;
 
 end
 
