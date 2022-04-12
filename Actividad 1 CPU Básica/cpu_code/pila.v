@@ -1,3 +1,5 @@
+`timescale 1 ns / 10 ps
+
 module pila(input wire clk, reset, push, pop, s_intr, input wire [9:0] dato, output wire [9:0] data_out);
   reg [9:0] stackmem[0:15]; //memoria de 16 palabras de 10 bits de ancho
   reg [15:0] sp;

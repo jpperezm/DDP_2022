@@ -1,4 +1,5 @@
 //Componentes varios
+`timescale 1 ns / 10 ps
 
 //Banco de registros de dos salidas y una entrada
 module regfile(input  wire        clk, 
@@ -21,8 +22,8 @@ module regfile(input  wire        clk,
   always @(posedge clk)
     if (we3) regb[wa3] <= wd3;	
   
-  assign rd1 = (ra1 != 0) ? regb[ra1] : 0;
-  assign rd2 = (ra2 != 0) ? regb[ra2] : 0;
+  assign rd1 = (ra1 != 0) ? regb[ra1] : 16'b0;
+  assign rd2 = (ra2 != 0) ? regb[ra2] : 16'b0;
 
 endmodule
 

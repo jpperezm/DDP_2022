@@ -53,6 +53,16 @@ begin
   #60
   buttons = 4'b1111;
 
+  #200
+  buttons = 4'b1011;
+  #60
+  buttons = 4'b1111;
+
+  #200
+  buttons = 4'b0111;
+  #60
+  buttons = 4'b1111;
+
 end
 
 reg signed [15:0] registros [15:0];

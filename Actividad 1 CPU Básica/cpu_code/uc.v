@@ -1,3 +1,5 @@
+`timescale 1 ns / 10 ps
+
 module uc(input wire [5:0] opcode, 
           input wire z,
           input wire [7:0] min_bit_a, min_bit_s, 

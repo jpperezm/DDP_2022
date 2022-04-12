@@ -1,3 +1,5 @@
+`timescale 1 ns / 10 ps
+
 module alu(input wire [15:0] a, b,
            input wire [2:0] op_alu,
            input wire s_inm,
@@ -17,7 +19,7 @@ begin
     3'b101: s = a | b;
     3'b110: s = -a;
     3'b111: s = -b;
-	default: s = 'bx; //desconocido en cualquier otro caso (x � z), por si se modifica el c�digo     
+	default: s = 16'bx; //desconocido en cualquier otro caso (x � z), por si se modifica el c�digo     
   endcase
 end
 

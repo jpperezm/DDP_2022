@@ -1,3 +1,5 @@
+`timescale 1 ns / 10 ps
+
 //################# GESTOR_INTR SOLICITUD ####################
 module manager_s (input wire [7:0] intr_in, intr_s, s_return_intr,
                   output wire [7:0] min_bit_s, data_s);

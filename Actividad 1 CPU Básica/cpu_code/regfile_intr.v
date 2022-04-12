@@ -1,3 +1,5 @@
+`timescale 1 ns / 10 ps
+
 module reg_intr(input wire [7:0] intr_selec, 
                 output reg [9:0] intr_dir_out);
 

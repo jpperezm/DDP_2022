@@ -1,3 +1,5 @@
+`timescale 1 ns / 10 ps
+
 module cd(input wire clk, reset, push, pop, transceiver_oe, s_stack_mux, s_mux_alu, s_mux_datos, we3, wez, s_intr, 
           input wire [1:0] s_inc,
           input wire [7:0] intr,
