@@ -45,22 +45,12 @@ begin
 
   #200
   buttons = 4'b1110;
-  #60
+  #600
   buttons = 4'b1111;
 
   #200
   buttons = 4'b1101;
-  #60
-  buttons = 4'b1111;
-
-  #200
-  buttons = 4'b1011;
-  #60
-  buttons = 4'b1111;
-
-  #200
-  buttons = 4'b0111;
-  #60
+  #600
   buttons = 4'b1111;
 
 end

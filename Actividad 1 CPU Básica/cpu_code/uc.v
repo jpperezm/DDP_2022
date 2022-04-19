@@ -274,7 +274,7 @@ always @(opcode, min_bit_a)
           end
         6'b001001:            // Salto condicional si z
           begin
-            s_inc = z ? 2'b0:2'b1;
+            s_inc = z ? 2'b0:2'b11;
             s_inm = 1'b0;
             s_mux_datos = 1'b0; 
             we3 = 1'b0;
@@ -290,7 +290,7 @@ always @(opcode, min_bit_a)
           end
         6'b001010:            // Salto condicional si no z
           begin
-            s_inc = z ? 2'b1:2'b0;
+            s_inc = z ? 2'b11:2'b0;
             s_inm = 1'b0;
             s_mux_datos = 1'b0; 
             we3 = 1'b0;
