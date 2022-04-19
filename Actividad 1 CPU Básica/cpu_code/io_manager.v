@@ -2,6 +2,7 @@
 
 module io_manager(input wire [15:0] dir_in,
                   input wire [3:0] buttons,
+                  input wire [9:0] switches,
                   input wire oe, clk, reset,
                   output reg [4:0] sram_control,
                   output wire [9:0] LED_R, 
@@ -66,8 +67,19 @@ always @(dir_in)
               sram_control = 5'b11111; 
               ce_g = 1'b0;
               ce_r = 1'b0;
-              data_out = buttons;
-              
+              data_out = {12'b0, ~buttons};
+            end
+        end
+
+      16'b1111111111111100:
+        begin
+          t_oe = ~oe;
+          if (!oe)
+            begin
+              sram_control = 5'b11111; 
+              ce_g = 1'b0;
+              ce_r = 1'b0;
+              data_out = switches;
             end
         end
 

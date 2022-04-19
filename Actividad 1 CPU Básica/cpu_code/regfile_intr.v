@@ -13,7 +13,7 @@ always @(intr_selec)
       8'bxxx10000: intr_dir_out = 10'b1110101100;
       8'bxx100000: intr_dir_out = 10'b1111000000;
       8'bx1000000: intr_dir_out = 10'b1111010100;
-      8'b10000000: intr_dir_out = 10'b1111101000;
+      8'b10000000: intr_dir_out = 10'b1111010100;
       default: intr_dir_out = 10'bx;
     endcase
   end

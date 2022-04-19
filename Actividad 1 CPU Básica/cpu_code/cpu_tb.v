@@ -40,6 +40,7 @@ begin
   reset = 1;  //a partir del flanco de subida del reset empieza el funcionamiento normal
   #10;
   buttons = 4'b1111;
+  switches = 10'b0;
   reset = 0;  //bajamos el reset 
 
 
@@ -48,10 +49,17 @@ begin
   #600
   buttons = 4'b1111;
 
+  #23950
+  switches = 10'b11;
+  #1500
+  switches = 10'b0;
+  
   #200
-  buttons = 4'b1101;
+  buttons = 4'b1011;
   #600
   buttons = 4'b1111;
+
+
 
 end
 

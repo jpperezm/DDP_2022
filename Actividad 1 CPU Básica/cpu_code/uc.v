@@ -375,7 +375,7 @@ always @(opcode, min_bit_a)
             s_inc = 2'b11;
             s_inm = 1'b0;
             s_mux_datos = 1'b1; 
-            we3 = 1'b1;
+            we3 = 1'b0;
             wez = 1'b0;
             op_alu = 3'b000;
             s_stack_mux = 1'b0;

@@ -551,7 +551,7 @@ int main(int argc, char* argv[]){
     char interrupt4[] = "intr_code/intr4.asm";
     char interrupt5[] = "intr_code/intr5.asm";
     char interrupt6[] = "intr_code/intr6.asm";
-    char interrupt7[] = "intr_code/intr7.asm";
+    //char interrupt7[] = "intr_code/intr7.asm";
     char interrupt8[] = "intr_code/intr8.asm";
 
     ensambla(srcfilename, dstfilename, 0);
@@ -561,6 +561,6 @@ int main(int argc, char* argv[]){
     ensambla(interrupt4, dstfilename, 920);
     ensambla(interrupt5, dstfilename, 940);
     ensambla(interrupt6, dstfilename, 960);
-    ensambla(interrupt7, dstfilename, 980);
-    ensambla(interrupt8, dstfilename, 1000);
+    //ensambla(interrupt7, dstfilename, 980);
+    ensambla(interrupt8, dstfilename, 980);
 }

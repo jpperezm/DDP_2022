@@ -14,6 +14,6 @@ wire [7:0] intr_wire;
 wire oe;
 
 cpu procesador(clk, reset, oe, direcciones_cpu, datos);
-io_manager entrada_salida(direcciones_cpu, buttons, oe, clk, reset, sram_control, r_led, g_led, direcciones, datos);
+io_manager entrada_salida(direcciones_cpu, buttons, switches, oe, clk, reset, sram_control, r_led, g_led, direcciones, datos);
 
 endmodule
