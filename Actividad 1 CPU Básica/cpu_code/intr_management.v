@@ -5,7 +5,7 @@ module manager_s (input wire [7:0] intr_in, intr_s, s_return_intr,
                   output wire [7:0] min_bit_s, data_s);
 
 assign data_s = (~s_return_intr & intr_s) | intr_in;
-assign min_bit_s = (-data_s & data_s);
+assign min_bit_s = (-intr_s & intr_s);
 endmodule
 
 //################# GESTOR_INTR ATENCIÓN ####################

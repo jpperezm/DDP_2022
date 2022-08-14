@@ -8,7 +8,7 @@ module uc(input wire [5:0] opcode,
           output reg [1:0] s_inc,
           output reg [2:0] op_alu);
 
-always @(opcode, min_bit_a)
+always @(*)
   if ((min_bit_s != 8'b0 && min_bit_a == 8'b0) || (min_bit_s < min_bit_a))
     begin 
       s_inc = 2'b01;
@@ -374,7 +374,7 @@ always @(opcode, min_bit_a)
           begin
             s_inc = 2'b11;
             s_inm = 1'b0;
-            s_mux_datos = 1'b1; 
+            s_mux_datos = 1'b0; 
             we3 = 1'b0;
             wez = 1'b0;
             op_alu = 3'b000;

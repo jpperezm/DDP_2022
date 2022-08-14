@@ -16,6 +16,12 @@ wire [15:0] rd1, rd2, mux_alu, alu_mux, trans_mux;
 wire [15:0] wd3;
 wire aluffz;
 
+wire wez_i, wez_ni;
+assign wez_i = s_intr & wez;
+assign wez_ni = !s_intr & wez;
+
+assign z = s_intr ? out_z_i : out_z;
+
 reg_intr intr_deco(intr, dir_intr);
 memprog memoria_prog(clk, salida_pc, instruccion);
 registro #(10) pc (clk, reset, mux_pc, salida_pc);
@@ -25,7 +31,8 @@ regfile banco_registros(clk, we3, instruccion[25:22], instruccion[21:18], instru
 alu alu_cpu(mux_alu, rd2, op_alu, s_mux_alu, alu_mux, aluffz);
 mux2 mux_b(alu_mux, trans_mux, s_mux_datos, wd3);
 mux2 mux_inm(rd1, instruccion[15:0], s_mux_alu, mux_alu);
-ffd ffz(clk, reset, aluffz, wez, z);
+ffd ffz(clk, reset, aluffz, wez_ni, out_z);
+ffd ffz_i(clk, reset, aluffz, wez_i, out_z_i);
 transceiver transc1(clk, reset, transceiver_oe, rd2, trans_mux, Datos);
 pila stack(clk, reset, push, pop, s_intr, salida_pc, stack_mux);
 mux2 #(10) mux_pila(mux2mux, stack_mux, s_stack_mux, mux_pc);

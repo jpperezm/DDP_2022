@@ -43,23 +43,17 @@ begin
   switches = 10'b0;
   reset = 0;  //bajamos el reset 
 
-
   #200
   buttons = 4'b1110;
   #600
   buttons = 4'b1111;
 
+/*
   #23950
-  switches = 10'b11;
-  #1500
-  switches = 10'b0;
-  
-  #200
-  buttons = 4'b1011;
+  buttons = 4'b1101;
   #600
   buttons = 4'b1111;
-
-
+*/
 
 end
 
