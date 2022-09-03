@@ -99,14 +99,14 @@ module transceiver(input wire clk, reset, oe, input wire [15:0] in, output wire 
 endmodule
 
 // Timer
-module timer #(parameter M = 7, WIDTH = 8) (input  wire clk, reset, //2500000 = 50 ms | 250000 = 5 ms | 25000 = 500 us | 50000 = 1 ms
+module timer #(parameter M = 20, WIDTH = 8) (input  wire clk, reset, //2500000 = 50 ms | 250000 = 5 ms | 25000 = 500 us | 50000 = 1 ms
                                                 output wire[WIDTH-1:0] pulse);
 
 parameter N = $clog2(M);
 reg [N-1:0] count;
 wire [N-1:0] count_next;
 
-always@(posedge clk, reset)
+always@(posedge clk, posedge reset)
 begin
 	if(reset)
 		count <= 0;

@@ -1,13 +1,36 @@
+subi R10, R15, 1
+jz recordmode
+subi R10, R14, 1
+jz showmode
+add R10, R14, R15
+jz stopmode
+jrintr
 
-load R6, R2
-subi R6, R6, 1
-jz apaga
-j enciende
+recordmode:
+load R9, R4
+load R11, R3
 
-apaga:
+addi R0, R0, 0
+
+store R11, R12
+addi R12, R12, 1
+
+subi R9, R9, 1
+jz apagaled
+store R5, R4
+jrintr
+
+showmode:
+load R13, R12
+addi R12, R12, 1
+store R13, R2
+jrintr
+
+stopmode:
+store R0, R4
 store R0, R2
 jrintr
 
-enciende:
-store R5, R2
+apagaled:
+store R0, R4
 jrintr

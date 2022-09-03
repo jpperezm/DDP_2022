@@ -18,7 +18,7 @@ wire aluffz;
 
 wire wez_i, wez_ni;
 assign wez_i = s_intr & wez;
-assign wez_ni = !s_intr & wez;
+assign wez_ni = ~s_intr & wez;
 
 assign z = s_intr ? out_z_i : out_z;
 

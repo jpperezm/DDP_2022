@@ -23,7 +23,7 @@ always @(*)
       transceiver_oe = 1'b0; 
       s_return_intr = 8'b0;
       s_call_intr = min_bit_s;
-      s_intr = 1'b1;
+      s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
     end
   else
     begin
@@ -43,7 +43,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b1001xx:            // Oper. Alu (A negado) 
           begin
@@ -59,7 +59,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b1010xx:            // Oper. Alu (A + B)
           begin
@@ -75,7 +75,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b1011xx:            // Oper. Alu (A - B)
           begin
@@ -91,7 +91,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b1100xx:            // Oper. Alu (A AND B)
           begin
@@ -107,7 +107,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b1101xx:           // Oper. Alu (A OR B)
           begin
@@ -123,7 +123,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b1110xx:            // Oper. Alu (-A)
           begin
@@ -139,7 +139,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
     // ###################################### TRABAJANDO CON REGISTROS ##########################################	
         6'b010000:            // Oper. Alu (A) MOV
@@ -156,7 +156,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b010001:            // Oper. Alu (A negado) 
           begin
@@ -172,7 +172,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end 
         6'b010010:            // Oper. Alu (A + B)
           begin
@@ -188,7 +188,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b010011:            // Oper. Alu (A - B)
           begin
@@ -204,7 +204,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end   
         6'b010100:            // Oper. Alu (A AND B)
           begin
@@ -220,7 +220,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b010101:            // Oper. Alu (A OR B)
           begin
@@ -236,7 +236,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0; 
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b010110:            // Oper. Alu (-A)
           begin
@@ -252,7 +252,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
 
     // ################################ INSTRUCCIONES DE SALTO #####################################
@@ -270,7 +270,7 @@ always @(*)
             transceiver_oe = 1'b0; 
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b001001:            // Salto condicional si z
           begin
@@ -286,7 +286,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b001010:            // Salto condicional si no z
           begin
@@ -302,7 +302,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b001011:            // Salto a subrutina. PUSH  JCALL  !!! AQUÍ HAY COSAS RARAS COMO QUE Z? 
           begin
@@ -318,7 +318,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b001100:            // Salto de vuelta de subrutina. POP JR
           begin
@@ -334,7 +334,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
         6'b001101:            // Salto de vuelta de interrupción JRINTR
           begin
@@ -350,7 +350,7 @@ always @(*)
             pop = 1'b1;
             s_return_intr = min_bit_a;
             s_call_intr = 8'b0;
-            s_intr = 1'b1;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
 
         6'b001110:            // 001110 LOAD  DEST(25) R1(Dirección)
@@ -367,7 +367,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 1'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
           
         6'b001111:            // 001111 STORE R2(Dato) R1(Dirección)
@@ -384,7 +384,7 @@ always @(*)
             transceiver_oe = 1'b1;
             s_return_intr = 1'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
          
         default: 
@@ -401,7 +401,7 @@ always @(*)
             transceiver_oe = 1'b0;
             s_return_intr = 8'b0;
             s_call_intr = 8'b0;
-            s_intr = 1'b0;
+            s_intr = min_bit_a != 1'b0 ? 1'b1 : 1'b0;
           end
       endcase
     end
