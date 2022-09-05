@@ -3,7 +3,7 @@
 module reg_intr(input wire [7:0] intr_selec, 
                 output reg [9:0] intr_dir_out);
 
-always @(intr_selec)
+always @(*)
   begin
     casex (intr_selec)                
       8'bxxxxxxx1: intr_dir_out = 10'b1101011100;

@@ -2,7 +2,7 @@
 `timescale 1 ns / 10 ps
 
 //Banco de registros de dos salidas y una entrada
-module regfile(input  wire        clk, reset,
+module regfile(input  wire        clk, 
                input  wire        we3,           //se�al de habilitaci�n de escritura
                input  wire [3:0]  wa3, ra2, ra1, //direcciones de regs leidos y reg a escribir
                input  wire [15:0]  wd3, 			 //dato a escribir
@@ -19,28 +19,8 @@ module regfile(input  wire        clk, reset,
   // se leen dos reg combinacionalmente
   // y la escritura del tercero ocurre en flanco de subida del reloj
   
-  always @(posedge clk, posedge reset)
-    if (reset) 
-    begin
-      regb[0]<=16'b0;
-      regb[1]<=16'b0;
-      regb[2]<=16'b0;
-      regb[3]<=16'b0;        
-      regb[4]<=16'b0;
-      regb[5]<=16'b0;
-      regb[6]<=16'b0;
-      regb[7]<=16'b0;
-      regb[8]<=16'b0;
-      regb[9]<=16'b0;
-      regb[10]<=16'b0;
-      regb[11]<=16'b0;
-      regb[12]<=16'b0;
-      regb[13]<=16'b0;
-      regb[14]<=16'b0;
-      regb[15]<=16'b0;
-    end
-    else if (we3) 
-      regb[wa3] <= wd3;	
+  always @(posedge clk)
+    if (we3) regb[wa3] <= wd3;	
   
   assign rd1 = (ra1 != 0) ? regb[ra1] : 16'b0;
   assign rd2 = (ra2 != 0) ? regb[ra2] : 16'b0;
@@ -119,7 +99,7 @@ module transceiver(input wire clk, reset, oe, input wire [15:0] in, output wire 
 endmodule
 
 // Timer
-module timer #(parameter M = 11999040, WIDTH = 8) (input  wire clk, reset, //2500000 = 50 ms | 250000 = 5 ms | 25000 = 500 us | 50000 = 1 ms
+module timer #(parameter M = 8000000, WIDTH = 8) (input  wire clk, reset, //2500000 = 50 ms | 250000 = 5 ms | 25000 = 500 us | 50000 = 1 ms
                                                 output wire[WIDTH-1:0] pulse);
 
 parameter N = $clog2(M);

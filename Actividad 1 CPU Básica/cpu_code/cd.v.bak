@@ -7,7 +7,6 @@ module cd(input wire clk, reset, push, pop, transceiver_oe, s_stack_mux, s_mux_a
           output wire [15:0] Direcciones,
           output wire z, 
           output wire [5:0] opcode,
-		  output wire [9:0] pc_led,
           inout wire [15:0] Datos);
 //Camino de datos de instrucciones de un solo ciclo
 
@@ -15,7 +14,7 @@ wire [31:0] instruccion;
 wire [9:0] salida_pc, mux2mux, mux_pc, sum_mux, stack_mux, dir_intr;
 wire [15:0] rd1, rd2, mux_alu, alu_mux, trans_mux;
 wire [15:0] wd3;
-wire aluffz, out_z, out_z_i;
+wire aluffz;
 
 wire wez_i, wez_ni;
 assign wez_i = s_intr & wez;
@@ -28,7 +27,7 @@ memprog memoria_prog(clk, salida_pc, instruccion);
 registro #(10) pc (clk, reset, mux_pc, salida_pc);
 sum sumador(salida_pc, 10'b0000000001, sum_mux);
 mux4 #(10) mux_a(instruccion[9:0], sum_mux, dir_intr, s_inc, mux2mux);
-regfile banco_registros(clk, reset, we3, instruccion[25:22], instruccion[21:18], instruccion[17:14], wd3, rd1, rd2);
+regfile banco_registros(clk, we3, instruccion[25:22], instruccion[21:18], instruccion[17:14], wd3, rd1, rd2);
 alu alu_cpu(mux_alu, rd2, op_alu, s_mux_alu, alu_mux, aluffz);
 mux2 mux_b(alu_mux, trans_mux, s_mux_datos, wd3);
 mux2 mux_inm(rd1, instruccion[15:0], s_mux_alu, mux_alu);
@@ -40,6 +39,5 @@ mux2 #(10) mux_pila(mux2mux, stack_mux, s_stack_mux, mux_pc);
 
 assign Direcciones = alu_mux;
 assign opcode = instruccion[31:26];
-assign pc_led = salida_pc;
 
 endmodule

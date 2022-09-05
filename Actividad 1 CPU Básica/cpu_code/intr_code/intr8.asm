@@ -21,9 +21,13 @@ store R5, R4
 jrintr
 
 showmode:
+load R9, R4
 load R13, R12
 addi R12, R12, 1
 store R13, R2
+subi R9, R9, 85
+jz apagaled
+store R6, R4
 jrintr
 
 stopmode:
